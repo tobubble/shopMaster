@@ -51,8 +51,13 @@
         </el-aside>
         <!-- main区域 -->
         <el-main>
+          <el-breadcrumb separator-class="el-icon-arrow-right">
+            <el-breadcrumb-item>首页</el-breadcrumb-item>
+            <el-breadcrumb-item v-for="(item, index) in pathArr" :key="index">
+              {{ item }}
+            </el-breadcrumb-item>
+          </el-breadcrumb>
           <router-view></router-view>
-          <router-view name="breadcrumb"></router-view>
         </el-main>
       </el-container>
     </el-container>
@@ -82,12 +87,19 @@ export default {
       },
       // 控制菜单栏是否收缩
       isColloapse: false,
+      // 用来保存当前的面包屑的数组
+      pathArr: ["用户管理", "用户列表"],
     };
   },
   created() {
     this.getMenuListData();
     this.setIndex();
-    window.sessionStorage.setItem("activeIndex", 110);
+    if (!window.sessionStorage.getItem("activeIndex")) {
+      window.sessionStorage.setItem("activeIndex", 110);
+    }
+
+    // 重置当前页面的所有数据为初始数据
+    // Object.assign(this.$data, this.$options.data())  // 不需要
   },
   methods: {
     // 网络请求
@@ -114,25 +126,20 @@ export default {
             item.icon = "el-icon-s-marketing";
             break;
         }
-        item.children.forEach((item2) => {
-          console.log(item2.id);
-        });
+        // item.children.forEach((item2) => {
+        //   console.log(item2.id);
+        // });
       });
       this.menuListData = res.data;
     },
     // 事件监听方法
-    // 监听右侧列表点击
-    menuSelected(index) {
+    // 监听左侧列表点击
+    menuSelected(index, indexPath) {
       const currentIndex = window.sessionStorage.getItem("activeIndex");
-      // console.log()
-      // debugger;
-      if (index !== window.sessionStorage.getItem("activeIndex")) {
-        // debugger;
-        window.sessionStorage.setItem("activeIndex", index);
-        this.$router.push(this.routerObj[+index]);
-      } else {
-        return;
-      }
+      if (index === window.sessionStorage.getItem("activeIndex")) return;
+      window.sessionStorage.setItem("activeIndex", index);
+      this.$router.push(this.routerObj[+index]);
+      this.geuBreadcrumbArr(indexPath[0], indexPath[1]);
     },
     // 监听菜单栏收缩按钮
     collopseClick() {
@@ -150,6 +157,19 @@ export default {
       const index = window.sessionStorage.getItem("activeIndex");
       if (!index) return;
       this.activeIndex = index;
+    },
+    // 获取当前的面包屑 数组列表(根据传递进来的两个 index 判断)
+    geuBreadcrumbArr(index1, index2) {
+      this.pathArr = [];
+      this.menuListData.forEach((item) => {
+        if (item.id + "" === index1) {
+          this.pathArr.push(item.authName);
+          item.children.forEach((item2) => {
+            if (item2.id + "" === index2)
+              return this.pathArr.push(item2.authName);
+          });
+        }
+      });
     },
   },
 };
@@ -223,5 +243,9 @@ export default {
   user-select: none;
   pointer-events: painted;
   cursor: pointer;
+}
+
+.el-breadcrumb {
+  margin-bottom: 20px;
 }
 </style>

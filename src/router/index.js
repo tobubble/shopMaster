@@ -12,7 +12,6 @@ const goodsList = () => import('views/goods/goodsList')
 const Home = () => import('views/home/Home')
 const orderList = () => import('views/orderManage/orderList')
 const userList = () => import('views/userManage/userList')
-const breadcrumb = () => import('components/breadcrumb')
 
 Vue.use(VueRouter)
 
@@ -28,12 +27,8 @@ const routes = [
   },
   {
     path: '/home',
-    components: {
-      default: Home,
-      breadcrumb: breadcrumb
-    },
+    component: Home,
     children: [
-      {path: '/bread'},
       {path: '', redirect: '/userList'},
       {path: '/authorityList', component: authorityList},
       {path: '/characterList', component: characterList},
@@ -55,7 +50,6 @@ const router = new VueRouter({
 
 // 全局导航守卫，防止没有令牌就进入到其他的页面而不通过 login 页面登录跳转
 router.beforeEach((to, from, next) => {
-  console.log(to)
   // 当前要去的页面不是  login  ， 判断是否携带 token 
   if(to.fullPath !== '/login' && !window.sessionStorage.token) {
     Vue.prototype.$message.error('请从登录页面进入')
