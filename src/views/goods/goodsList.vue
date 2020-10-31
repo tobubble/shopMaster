@@ -6,7 +6,7 @@
           <el-input v-model="getGoodsParams.query" clearable @clear="searchClear">
             <el-button @click="searchGoodsHandle" slot="append" icon="el-icon-search"></el-button>
           </el-input>
-          <el-button class="button" type="primary">添加商品</el-button>
+          <el-button @click="addGoodsHandle" class="button" type="primary">添加商品</el-button>
         </el-col>
       </el-row>
 
@@ -239,6 +239,11 @@ export default {
     searchClear() {
       this.getGoodsParams.pagenum = 1
       this.getGoodsListPut()
+    },
+
+    // 监听天机商品按钮的点击
+    addGoodsHandle() {
+      this.$router.push('/addGoods')
     }
   },
 };

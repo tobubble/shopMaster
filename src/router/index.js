@@ -9,6 +9,7 @@ const dataSta = () => import('views/dataSta/dataSta')
 const classifyParams = () => import('views/goods/classifyParams')
 const goodsClassify = () => import('views/goods/goodsClassify')
 const goodsList = () => import('views/goods/goodsList')
+const addGoods = () => import('views/goods/addGoods')
 const Home = () => import('views/home/Home')
 const orderList = () => import('views/orderManage/orderList')
 const userList = () => import('views/userManage/userList')
@@ -38,6 +39,7 @@ const routes = [
       {path: '/goodsList', component: goodsList},
       {path: '/orderList', component: orderList},
       {path: '/userList', component: userList},
+      {path: '/addGoods', component: addGoods},
     ]
   }
 ]
