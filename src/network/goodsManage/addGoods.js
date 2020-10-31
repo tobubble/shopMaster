@@ -19,7 +19,7 @@ export function getManyParams(id) {
   })
 }
 
-// 获取紧要参数列表
+// 获取静态参数列表
 export function getOnlyParams(id) {
   return request({
     url: `categories/${id}/attributes`,
