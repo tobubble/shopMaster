@@ -1,18 +1,26 @@
 <template>
   <div>
     <el-card>
-      <el-row>
-        <el-col :span="7">
-          <el-input v-model="getGoodsParams.query" clearable @clear="searchClear">
-            <el-button @click="searchGoodsHandle" slot="append" icon="el-icon-search"></el-button>
-          </el-input>
-          <el-button @click="addGoodsHandle" class="button" type="primary">添加商品</el-button>
-        </el-col>
-      </el-row>
-
+      <div class="inputBox">
+        <el-input
+          class="inputV"
+          v-model="getGoodsParams.query"
+          clearable
+          @clear="searchClear"
+        >
+          <el-button
+            @click="searchGoodsHandle"
+            slot="append"
+            icon="el-icon-search"
+          ></el-button>
+        </el-input>
+        <el-button @click="addGoodsHandle" class="button" type="primary"
+          >添加商品</el-button
+        >
+      </div>
       <el-table :data="goodsListData.goods" border stripe>
         <el-table-column type="index" label="#"></el-table-column>
-        <el-table-column label="商品名称" prop="goods_name"></el-table-column>
+        <el-table-column min-width="200px" label="商品名称" prop="goods_name"></el-table-column>
         <el-table-column
           align="center"
           width="140px"
@@ -35,7 +43,11 @@
             <el-button @click="editGoods(scope.row)" size="mini" type="primary">
               <i class="el-icon-edit"></i>
             </el-button>
-            <el-button @click="deleteGoodsHandle(scope.row)" size="mini" type="danger">
+            <el-button
+              @click="deleteGoodsHandle(scope.row)"
+              size="mini"
+              type="danger"
+            >
               <i class="el-icon-delete"></i>
             </el-button>
           </template>
@@ -98,7 +110,11 @@
 </template>
 
 <script>
-import { getGoodsList, eidtGoods, deleteGoods } from "network/goodsManage/goodList";
+import {
+  getGoodsList,
+  eidtGoods,
+  deleteGoods,
+} from "network/goodsManage/goodList";
 
 export default {
   data() {
@@ -140,8 +156,8 @@ export default {
           { required: true, message: "商品重量不能为空", triggle: "blur" },
         ],
       },
-      // 保存要删除的商品的 id 
-      deleteGoodsID: '',
+      // 保存要删除的商品的 id
+      deleteGoodsID: "",
     };
   },
   created() {
@@ -172,10 +188,11 @@ export default {
     },
     // 请求删除商品
     async deleteGoodsPut() {
-      const {data: res} = await deleteGoods(this.deleteGoodsID)
-      if(res.meta.status !== 200) return this.$message.error('请求删除商品失败')
-      this.$message.success('删除商品成功')
-      this.getGoodsListPut()
+      const { data: res } = await deleteGoods(this.deleteGoodsID);
+      if (res.meta.status !== 200)
+        return this.$message.error("请求删除商品失败");
+      this.$message.success("删除商品成功");
+      this.getGoodsListPut();
     },
 
     // 事件监听
@@ -215,36 +232,38 @@ export default {
     },
     // 监听删除按钮的点击
     deleteGoodsHandle(node) {
-      console.log(node)
-      this.deleteGoodsID = node.goods_id
-      this.$confirm('此操作将永久删除该商品, 是否继续?', '提示', {
-          confirmButtonText: '确定',
-          cancelButtonText: '取消',
-          type: 'warning'
-        }).then(() => {
-          this.deleteGoodsPut()
-        }).catch(() => {
+      console.log(node);
+      this.deleteGoodsID = node.goods_id;
+      this.$confirm("此操作将永久删除该商品, 是否继续?", "提示", {
+        confirmButtonText: "确定",
+        cancelButtonText: "取消",
+        type: "warning",
+      })
+        .then(() => {
+          this.deleteGoodsPut();
+        })
+        .catch(() => {
           this.$message({
-            type: 'info',
-            message: '已取消删除'
-          });          
+            type: "info",
+            message: "已取消删除",
+          });
         });
     },
     // 监听查询按钮的点击
     searchGoodsHandle() {
-      this.getGoodsParams.pagenum = 1
-      this.getGoodsListPut()
+      this.getGoodsParams.pagenum = 1;
+      this.getGoodsListPut();
     },
     //监听清除查询按钮的点击
     searchClear() {
-      this.getGoodsParams.pagenum = 1
-      this.getGoodsListPut()
+      this.getGoodsParams.pagenum = 1;
+      this.getGoodsListPut();
     },
 
     // 监听天机商品按钮的点击
     addGoodsHandle() {
-      this.$router.push('/addGoods')
-    }
+      this.$router.push("/addGoods");
+    },
   },
 };
 </script>
@@ -260,5 +279,13 @@ export default {
 
 .el-table {
   margin-top: 20px;
+}
+
+.inputV {
+  width: 400px;
+}
+
+.inputBox {
+  width: 600px;
 }
 </style>

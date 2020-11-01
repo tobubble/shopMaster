@@ -51,9 +51,9 @@
           </template>
         </el-table-column>
         <el-table-column type="index" label="#"></el-table-column>
-        <el-table-column prop="roleName" label="角色名称"></el-table-column>
-        <el-table-column prop="roleDesc" label="角色描述"></el-table-column>
-        <el-table-column label="操作">
+        <el-table-column min-width="120px" prop="roleName" label="角色名称"></el-table-column>
+        <el-table-column min-width="120px" prop="roleDesc" label="角色描述"></el-table-column>
+        <el-table-column label="操作" width="260px">
           <template slot-scope="scope">
             <el-button
               type="primary"

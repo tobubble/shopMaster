@@ -2,29 +2,32 @@
   <div>
     <el-card>
       <!-- 用户查询功能 -->
-      <el-row>
-        <el-col :span="6">
-          <el-input v-model="getUserListParams.query" clearable @clear="searchClear">
-            <el-button
-              @click="searchClickHandle"
-              slot="append"
-              class="el-icon-search"
-            ></el-button>
-          </el-input>
-        </el-col>
+      <div class="inputBox">
+        <el-input
+          class="input"
+          v-model="getUserListParams.query"
+          clearable
+          @clear="searchClear"
+        >
+          <el-button
+            @click="searchClickHandle"
+            slot="append"
+            class="el-icon-search"
+          ></el-button>
+        </el-input>
         <el-button @click="addUserHandle" class="searchUser" type="primary"
           >添加用户</el-button
         >
-      </el-row>
+      </div>
       <!-- 表格区域 -->
 
       <el-table border stripe :data="userListObj.users">
         <el-table-column label="#" type="index"></el-table-column>
-        <el-table-column label="姓名" prop="username"></el-table-column>
-        <el-table-column label="邮箱" prop="email"></el-table-column>
-        <el-table-column label="电话" prop="mobile"></el-table-column>
-        <el-table-column label="角色" prop="role_name"></el-table-column>
-        <el-table-column label="状态">
+        <el-table-column min-width="120px" label="姓名" prop="username"></el-table-column>
+        <el-table-column min-width="140px" label="邮箱" prop="email"></el-table-column>
+        <el-table-column min-width="120px" label="电话" prop="mobile"></el-table-column>
+        <el-table-column min-width="120px" label="角色" prop="role_name"></el-table-column>
+        <el-table-column min-width="120px" label="状态">
           <!-- 状态区域 -->
           <template slot-scope="scope">
             <el-switch
@@ -353,9 +356,9 @@ export default {
     // 事件监听
     // 监听搜索按钮点击
     searchClickHandle() {
-      this.getUserListParams.pagenum = 1
-      console.log(this.getUserListParams)
-      this.getUserListData()
+      this.getUserListParams.pagenum = 1;
+      console.log(this.getUserListParams);
+      this.getUserListData();
     },
     // 监听添加用户按钮点击
     addUserHandle() {
@@ -447,7 +450,7 @@ export default {
     },
     // 监听分配对话框的确定点击
     setUserConfirm() {
-      if(!this.setUserForm.rid) return this.$message.error('请选择角色')
+      if (!this.setUserForm.rid) return this.$message.error("请选择角色");
       this.setCharactorPut();
       this.setUserDialogVisible = false;
     },
@@ -459,8 +462,8 @@ export default {
     },
     // 监听搜索用户框中的清除点击
     searchClear() {
-      this.getUserListData()
-    }
+      this.getUserListData();
+    },
   },
 };
 </script>
@@ -477,5 +480,13 @@ export default {
 .nowUser {
   font-size: 16px;
   margin-top: 15px;
+}
+
+.input {
+  width: 400px;
+}
+
+.inputBox {
+  width: 600px;
 }
 </style>

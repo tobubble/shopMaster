@@ -17,9 +17,9 @@
       <el-table border stripe :data="orderListData.goods">
         <el-table-column type="expand"> </el-table-column>
         <el-table-column type="index" label="#"></el-table-column>
-        <el-table-column prop="order_number" label="订单编号"></el-table-column>
-        <el-table-column prop="order_price" label="订单价格"></el-table-column>
-        <el-table-column label="是否付款">
+        <el-table-column min-width="200px" prop="order_number" label="订单编号"></el-table-column>
+        <el-table-column min-width="120px"  prop="order_price" label="订单价格"></el-table-column>
+        <el-table-column min-width="120px" label="是否付款">
           <template slot-scope="scope">
             <el-tag v-if="scope.row.pay_status === 1" type="success"
               >已付款</el-tag
@@ -27,18 +27,18 @@
             <el-tag type="warning">未付款</el-tag>
           </template>
         </el-table-column>
-        <el-table-column label="是否发货">
+        <el-table-column min-width="120px"  label="是否发货">
           <template slot-scope="scope">
             <span v-if="scope.row.is_send === '是'">是</span>
             <span v-else>否</span>
           </template>
         </el-table-column>
-        <el-table-column label="下单时间">
+        <el-table-column min-width="200px"  label="下单时间">
           <template slot-scope="scope">
             {{ scope.row.create_time | dateFormat }}
           </template>
         </el-table-column>
-        <el-table-column label="操作">
+        <el-table-column  min-width="130px" label="操作">
           <template>
             <el-button
               size="mini"

@@ -67,7 +67,7 @@
               label="参数名称"
               prop="attr_name"
             ></el-table-column>
-            <el-table-column label="操作">
+            <el-table-column label="操作" min-width="120px">
               <template slot-scope="scope">
                 <el-button
                   @click="editParamsHandle(scope.row)"
@@ -129,7 +129,7 @@
               label="参数名称"
               prop="attr_name"
             ></el-table-column>
-            <el-table-column label="操作">
+            <el-table-column label="操作" min-width="260px">
               <template slot-scope="scope">
                 <el-button
                   @click="editParamsHandle(scope.row)"
@@ -462,6 +462,7 @@ export default {
 <style lang='less' scoped>
 .selectBox {
   margin: 20px 0;
+  width: 600px;
 }
 
 .el-cascader {

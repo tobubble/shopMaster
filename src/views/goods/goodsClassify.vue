@@ -5,7 +5,7 @@
 
       <el-table :data="goodsClassifyData.result" border stripe row-key="cat_id">
         <el-table-column type="index" label="#"></el-table-column>
-        <el-table-column label="分类名称" prop="cat_name"> </el-table-column>
+        <el-table-column min-width="120px" label="分类名称" prop="cat_name"> </el-table-column>
         <el-table-column label="是否有效">
           <template slot-scope="scope">
             <i
@@ -27,7 +27,7 @@
             <el-tag size="medium" v-else type="warning">三级</el-tag>
           </template>
         </el-table-column>
-        <el-table-column label="操作">
+        <el-table-column label="操作" width="240px">
           <template slot-scope="scope">
             <el-button
               @click="editGoodsClassify(scope.row)"

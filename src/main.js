@@ -19,6 +19,11 @@ Vue.use(VueQuillEditor, /* { default global options } */)
 import echarts from "echarts";
 Vue.prototype.$echarts = echarts
 
+// 导入 nprogress 
+import nprogress from "nprogress"
+import 'nprogress/nprogress.css'
+Vue.prototype.$nprogress = nprogress
+
 Vue.config.productionTip = false
 
 Vue.filter("dateFormat", originVal => {

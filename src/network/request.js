@@ -10,11 +10,13 @@ export function request(config) {
   })
 
   instance1.interceptors.request.use(config => {
+    Vue.prototype.$nprogress.start()
     config.headers.Authorization = window.sessionStorage.getItem('token')
     return config
   })
 
   instance1.interceptors.response.use(config => {
+    Vue.prototype.$nprogress.done()
     return config
   }, error => {
     if(error.message.includes('timeout')) {
