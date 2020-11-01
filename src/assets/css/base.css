@@ -9,3 +9,7 @@ html, body {
   background-color: #bfa;
   height: 100%;
 }
+
+.el-table {
+  margin: 20px 0;
+}
