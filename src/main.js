@@ -15,6 +15,10 @@ import 'quill/dist/quill.bubble.css' // for bubble theme
 
 Vue.use(VueQuillEditor, /* { default global options } */)
 
+// 导入 echarts
+import echarts from "echarts";
+Vue.prototype.$echarts = echarts
+
 Vue.config.productionTip = false
 
 Vue.filter("dateFormat", originVal => {
