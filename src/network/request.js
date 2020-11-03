@@ -3,8 +3,8 @@ import Vue from 'vue'
 
 export function request(config) {
   const instance1 = axios.create({
-    // baseURL: 'https://www.liulongbin.top:8888/api/private/v1/',
-    baseURL: 'http://127.0.0.1:8888/api/private/v1/',
+    baseURL: 'https://www.liulongbin.top:8888/api/private/v1/',
+    // baseURL: 'http://127.0.0.1:8888/api/private/v1/',
     timeout: 5000,
     method: 'post'
   })

@@ -159,7 +159,7 @@ import {
   deleteCharactor,
   addCharactor,
   getAuthorityTree,
-  searchAuthorityById,
+  // searchAuthorityById,
   setAuthority
 } from "network/authorityManage/charactorList";
 
@@ -261,13 +261,13 @@ export default {
       this.setDialogVisible = true;
       console.log(this.authorityTree);
     },
-    // 请求查询角色权限
-    async searchAuthorityByIdPut() {
-      const { data: res } = await searchAuthorityById(this.searchId);
-      if (res.meta.status !== 200) return this.$message.error("请求数据失败");
-      this.searchCharactorInfo = res.data;
-      console.log(this.searchCharactorInfo);
-    },
+    // // 请求查询角色权限
+    // async searchAuthorityByIdPut() {
+    //   const { data: res } = await searchAuthorityById(this.searchId);
+    //   if (res.meta.status !== 200) return this.$message.error("请求数据失败");
+    //   this.searchCharactorInfo = res.data;
+    //   console.log(this.searchCharactorInfo);
+    // },
     // 请求角色授权
     async setAuthorityPut() {
       const {data: res} = await setAuthority(this.setAuthorityForm)

@@ -17,8 +17,16 @@
       <el-table border stripe :data="orderListData.goods">
         <el-table-column type="expand"> </el-table-column>
         <el-table-column type="index" label="#"></el-table-column>
-        <el-table-column min-width="200px" prop="order_number" label="订单编号"></el-table-column>
-        <el-table-column min-width="120px"  prop="order_price" label="订单价格"></el-table-column>
+        <el-table-column
+          min-width="200px"
+          prop="order_number"
+          label="订单编号"
+        ></el-table-column>
+        <el-table-column
+          min-width="120px"
+          prop="order_price"
+          label="订单价格"
+        ></el-table-column>
         <el-table-column min-width="120px" label="是否付款">
           <template slot-scope="scope">
             <el-tag v-if="scope.row.pay_status === 1" type="success"
@@ -27,26 +35,26 @@
             <el-tag type="warning">未付款</el-tag>
           </template>
         </el-table-column>
-        <el-table-column min-width="120px"  label="是否发货">
+        <el-table-column min-width="120px" label="是否发货">
           <template slot-scope="scope">
             <span v-if="scope.row.is_send === '是'">是</span>
             <span v-else>否</span>
           </template>
         </el-table-column>
-        <el-table-column min-width="200px"  label="下单时间">
+        <el-table-column min-width="200px" label="下单时间">
           <template slot-scope="scope">
             {{ scope.row.create_time | dateFormat }}
           </template>
         </el-table-column>
-        <el-table-column  min-width="130px" label="操作">
-          <template>
+        <el-table-column min-width="130px" label="操作">
+          <template slot-scope="scope">
             <el-button
               size="mini"
               type="primary"
               icon="el-icon-edit"
             ></el-button>
             <el-button
-              @click="locationClick"
+              @click="locationClick(scope.row)"
               size="mini"
               type="success"
               icon="el-icon-location"
@@ -152,8 +160,8 @@ export default {
     },
     // 监听location按钮的点击
     locationClick() {
-      this.locationDialogVisible = true
-      this.$message.success('暂不支持查询物流信息，使用假数据代替')
+      this.locationDialogVisible = true;
+      this.$message.success("暂不支持查询物流信息，使用假数据代替");
     },
   },
   computed: {
@@ -162,7 +170,7 @@ export default {
         {
           time: "2020-09-11 09:39:00",
           context: "已签收，感谢再次使用顺丰，期待再次为您服务",
-          icon: 'el-icon-more'
+          icon: "el-icon-more",
         },
         {
           time: "2020-09-10 14:39:00",
