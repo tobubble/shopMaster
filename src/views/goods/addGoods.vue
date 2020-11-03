@@ -138,7 +138,12 @@
             >添加商品</el-button
           >
         </el-tab-pane>
-        <el-tab-pane name="5" label="创建完成">创建完成</el-tab-pane>
+        <el-tab-pane name="5" label="创建完成">
+          <div class="buttonBox">
+            <el-button type="primary" @click="addGoodsContinue">继续添加商品</el-button>
+            <el-button type="primary" @click="goGoodsList">返回商品列表查看商品</el-button>
+          </div>
+        </el-tab-pane>
       </el-tabs>
     </el-card>
 
@@ -172,6 +177,7 @@ export default {
         goods_catArr: "",
         goods_cat: "",
         goods_introduce: "",
+        addPut: false,
       },
 
       // 图片上传的参数
@@ -296,9 +302,9 @@ export default {
     async addGoodsPut(config) {
       const { data: res } = await addGoods(config);
       console.log(res);
-      if (res.meta.status !== 201)
-        return this.$message.error("请求数据失败了");
+      if (res.meta.status !== 201) return this.$message.error("请求数据失败了");
       this.$message.success("添加商品成功");
+      this.addGoodsForm1.addPut = true
       this.activeIndex = "5";
     },
 
@@ -333,7 +339,11 @@ export default {
           this.getManyParamsPut();
           console.log(this.manyParamsForm);
         });
-      } else if (activeName == "4") {
+      } else if (activeName == "5") {
+        if (!this.addGoodsForm1.addPut) {
+          flag = false;
+          this.$message.error("请在第五步商品内容页面提交完成");
+        }
       }
       return flag;
     },
@@ -359,7 +369,23 @@ export default {
         { pics: this.imgUploadParams },
         { attrs: this.manyParamsForm }
       );
-      this.addGoodsPut(formObj)
+      this.addGoodsPut(formObj);
+      // 添加商品之后
+    },
+    // 监听继续添加商品点击
+    addGoodsContinue() {
+      this.addGoodsForm1 = {};
+      this.imgUploadParams = {};
+      this.manyParamsForm = {};
+      // this.
+      // this.$r
+      this.activeIndex = "0";
+      this.$refs.addForm1.resetFields();
+    },
+
+    // 监听返回商品列表查看商品
+    goGoodsList() {
+      this.$router.push("/goodsList");
     },
   },
 };
